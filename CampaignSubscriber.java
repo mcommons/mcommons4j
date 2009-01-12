@@ -14,10 +14,10 @@ public class CampaignSubscriber{
   
   public CampaignSubscriber(Node node) throws Exception{
     Element subElem = (Element) node;
-    id = mCommons.getValueFromChildNodeByNodeName(subElem, "id");
-    phoneNumber = mCommons.getValueFromChildNodeByNodeName(subElem, "phone_number");
+    id = MobileCommons.getValueFromChildNodeByNodeName(subElem, "id");
+    phoneNumber = MobileCommons.getValueFromChildNodeByNodeName(subElem, "phone_number");
     
-    String dateString = mCommons.getValueFromChildNodeByNodeName(subElem, "activated_at");
+    String dateString = MobileCommons.getValueFromChildNodeByNodeName(subElem, "activated_at");
     
     if (!dateString.equals("")){
     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss zzz");

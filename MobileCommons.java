@@ -21,14 +21,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-//import sun.util.calendar.BaseCalendar.Date;
 import java.util.Date;
  
-public class mCommons {
+public class MobileCommons {
   String rootUrl;
   User user;
   
-  mCommons(String url, User aUser) { // "http://hrc.mcommons.com/api/"
+  MobileCommons(String url, User aUser) { // "http://hrc.mcommons.com/api/"
     rootUrl = url;
     user = aUser;
   }
@@ -223,10 +222,7 @@ public class mCommons {
         	NodeList errorList = doc.getElementsByTagName("error");	    
             Element errorElem = (Element) errorList.item(0);
             return "error" + errorElem.getAttribute("id") + ":" + errorElem.getAttribute("message");
-        }
-        	
-
-        
+        }   
         
         }
     

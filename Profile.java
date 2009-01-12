@@ -15,10 +15,10 @@ public class Profile{
     Element profileElem = (Element) node;
     id = profileElem.getAttribute("id");
     
-        firstName = mCommons.getValueFromChildNodeByNodeName(profileElem, "first_name");
-        lastName = mCommons.getValueFromChildNodeByNodeName(profileElem, "last_name");
-        phoneNumber = mCommons.getValueFromChildNodeByNodeName(profileElem, "phone_number");
-        email = mCommons.getValueFromChildNodeByNodeName(profileElem, "email");
+        firstName = MobileCommons.getValueFromChildNodeByNodeName(profileElem, "first_name");
+        lastName = MobileCommons.getValueFromChildNodeByNodeName(profileElem, "last_name");
+        phoneNumber = MobileCommons.getValueFromChildNodeByNodeName(profileElem, "phone_number");
+        email = MobileCommons.getValueFromChildNodeByNodeName(profileElem, "email");
         
         NodeList addressList = profileElem.getElementsByTagName("address");
         Element addressElem = (Element) addressList.item(0);
@@ -55,12 +55,12 @@ public class Profile{
     private String country;
     
     public Address(Element elem) throws Exception{
-      street1 = mCommons.getValueFromChildNodeByNodeName(elem, "street1");
-      street2 = mCommons.getValueFromChildNodeByNodeName(elem, "street2");
-      city = mCommons.getValueFromChildNodeByNodeName(elem, "city");
-      state = mCommons.getValueFromChildNodeByNodeName(elem, "state");
-      postalCode = mCommons.getValueFromChildNodeByNodeName(elem,"postal_code");
-      country = mCommons.getValueFromChildNodeByNodeName(elem, "country");
+      street1 = MobileCommons.getValueFromChildNodeByNodeName(elem, "street1");
+      street2 = MobileCommons.getValueFromChildNodeByNodeName(elem, "street2");
+      city = MobileCommons.getValueFromChildNodeByNodeName(elem, "city");
+      state = MobileCommons.getValueFromChildNodeByNodeName(elem, "state");
+      postalCode = MobileCommons.getValueFromChildNodeByNodeName(elem,"postal_code");
+      country = MobileCommons.getValueFromChildNodeByNodeName(elem, "country");
     }
     
     public String getStreet1(){

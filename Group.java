@@ -21,8 +21,8 @@ public class Group {
       type = GroupType.FILTERED_GROUP;
     }
     
-    name = mCommons.getValueFromChildNodeByNodeName(groupElem, "name");
-    size = Integer.parseInt(mCommons.getValueFromChildNodeByNodeName(groupElem, "size"));    
+    name = MobileCommons.getValueFromChildNodeByNodeName(groupElem, "name");
+    size = Integer.parseInt(MobileCommons.getValueFromChildNodeByNodeName(groupElem, "size"));    
   }
   
   

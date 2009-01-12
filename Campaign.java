@@ -17,7 +17,7 @@ public class Campaign
         active = true;
       }
       
-      name = mCommons.getValueFromChildNodeByNodeName(campaignElem, "name");   
+      name = MobileCommons.getValueFromChildNodeByNodeName(campaignElem, "name");   
   }
   
   public String getName(){
