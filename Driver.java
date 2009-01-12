@@ -1,5 +1,6 @@
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.util.Date;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -47,7 +48,10 @@ public class Driver {
 //      System.out.println(subz[i].toString());
 //    }
 
-       site.sendSmsMessage("471", "9732228304", "hi");
+	   Date date = new Date();
+	  
+       System.out.println(site.sendSmsMessage("471", "9732238304", "hi"));
+       System.out.println(site.scheduleBroadcast("471", "bye", date));
 	  
 	  
   }

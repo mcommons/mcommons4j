@@ -4,6 +4,8 @@ import java.io.StringWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
  
@@ -18,6 +20,9 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+
+//import sun.util.calendar.BaseCalendar.Date;
+import java.util.Date;
  
 public class mCommons {
   String rootUrl;
@@ -86,15 +91,42 @@ public class mCommons {
         return allCampaigns;
   }
   
-  public InputStream sendSmsMessage(String campaignId, String phoneNumber, String body) throws Exception {
+  public String sendSmsMessage(String campaignId, String phoneNumber, String body) throws Exception {
 	  Map<String,String> params = new HashMap<String,String>();
 	  params.put("campaign_id", campaignId);
 	  params.put("phone_number", phoneNumber);
 	  params.put("body", body);
 	   
-	  InputStream stream = validatedPost(rootUrl+"send_message", params);
+	  String response = validatedPost(rootUrl+"send_message", params);
 
-	  return stream;
+	  return response;
+  }
+  
+  public String scheduleBroadcast(String campaignId, String body) throws Exception {
+	  Map<String,String> params = new HashMap<String,String>();
+	  params.put("campaign_id", campaignId);
+	  params.put("body", body);
+	   
+	  String response = validatedPost(rootUrl+"schedule_broadcast", params);
+
+	  return response;
+  }
+  
+  public String scheduleBroadcast(String campaignId, String body, Date date) throws Exception {
+	  Map<String,String> params = new HashMap<String,String>();
+	  params.put("campaign_id", campaignId);
+	  params.put("body", body);
+	  
+	  DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	  DateFormat dff = new SimpleDateFormat("HH:mm:ssZ");
+	  String dateString = df.format(date) + "T" + dff.format(date);
+	  System.out.println(dateString);
+	  
+	  params.put("time", dateString);
+	  
+	  String response = validatedPost(rootUrl+"schedule_broadcast", params);
+
+	  return response;
   }
   
   //used to fetch value from xml tag named nodeName which is one level below superElem
@@ -127,7 +159,7 @@ public class mCommons {
     return doc.getElementsByTagName(tagName);
   }
   
-	private InputStream validatedPost(String uri, Map<String, String> vars) throws Exception
+	private String validatedPost(String uri, Map<String, String> vars) throws Exception
 	{
 		HttpURLConnection connection;
 		connection = (HttpURLConnection) new URL(uri).openConnection();
@@ -157,10 +189,12 @@ public class mCommons {
 	    NodeList responseList = doc.getElementsByTagName("response");	    
         Element responseElem = (Element) responseList.item(0);
         
-        assert responseElem.getAttribute("success").equals("true");
+//        assert responseElem.getAttribute("success").equals(true);        
+
         
-		return inStream;
-	}
+        return responseElem.getAttribute("success");
+        }
+    
   
   private void authenticate(URLConnection connection){
     String userPass = user.getStringForAuth();
