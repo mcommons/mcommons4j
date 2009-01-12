@@ -102,6 +102,27 @@ public class mCommons {
 	  return response;
   }
   
+  public String sendSmsMessage(String campaignId, Profile profile, String body) throws Exception {
+	  return sendSmsMessage(campaignId, profile.getPhoneNumber(), body);
+  }
+  
+  public String sendSmsMessage(String campaignId, CampaignSubscriber sub, String body) throws Exception {
+	  return sendSmsMessage(campaignId, sub.getPhoneNumber(), body);
+  }
+  
+  public String sendSmsMessage(Campaign campaign, String phoneNumber, String body) throws Exception {
+	  return sendSmsMessage(campaign.getId(), phoneNumber, body);
+  }
+  
+  public String sendSmsMessage(Campaign campaign, Profile profile, String body) throws Exception {
+	  return sendSmsMessage(campaign.getId(), profile.getPhoneNumber(), body);
+  }
+  
+  public String sendSmsMessage(Campaign campaign, CampaignSubscriber sub, String body) throws Exception {
+	  return sendSmsMessage(campaign.getId(), sub.getPhoneNumber(), body);
+  } 
+  
+  
   public String scheduleBroadcast(String campaignId, String body) throws Exception {
 	  Map<String,String> params = new HashMap<String,String>();
 	  params.put("campaign_id", campaignId);
@@ -110,6 +131,10 @@ public class mCommons {
 	  String response = validatedPost(rootUrl+"schedule_broadcast", params);
 
 	  return response;
+  }
+  
+  public String scheduleBroadcast(Campaign campaign, String body) throws Exception {
+	  return scheduleBroadcast(campaign.getId(), body);
   }
   
   public String scheduleBroadcast(String campaignId, String body, Date date) throws Exception {
@@ -127,6 +152,10 @@ public class mCommons {
 	  String response = validatedPost(rootUrl+"schedule_broadcast", params);
 
 	  return response;
+  }
+  
+  public String scheduleBroadcast(Campaign campaign, String body, Date date) throws Exception {
+	  return scheduleBroadcast(campaign.getId(), body, date);
   }
   
   //used to fetch value from xml tag named nodeName which is one level below superElem
@@ -195,7 +224,6 @@ public class mCommons {
         return responseElem.getAttribute("success");
         }
     
-  
   private void authenticate(URLConnection connection){
     String userPass = user.getStringForAuth();
     String encoding = new sun.misc.BASE64Encoder().encode(userPass.getBytes());
