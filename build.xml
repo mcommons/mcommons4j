@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="mcommons4j" default="jar">
+	
+	<tstamp>
+		<format property="build.time" pattern="yyyy_MM_dd"/>
+	</tstamp>
+	
+	<!-- Source files -->
+	<property name="base.dir" value="."/>
+	<property name="src.dir" value="${base.dir}/src"/>
+	<property name="src.java.dir" value="${src.dir}/java"/>
+	<property name="lib.dir" value="${base.dir}/lib"/>
+
+	<!-- Build artifacts -->
+	<property name="build.root" value="${base.dir}/build"/>	
+	<property name="build.name" value="mcommons4j-${build.time}"/>
+  <property name="class.dir" value="${build.root}/mcommons4j"/>
+	<property name="jar.name" value="${build.name}.jar"/>
+  
+		<!-- Basic initialization -->
+	<target name="init">
+		<echo message="Running common build for project ${project.name} with basedir=${base.dir}"/>
+		<mkdir dir="${build.root}"/>
+		<mkdir dir="${class.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${lib.dir}"/>
+	</target>
+
+	<!-- Clean build artifacts -->
+	<target name="clean" description="Remove all build &amp; runtime artifacts">
+		<delete dir="${build.root}"/>
+	</target>
+	
+	
+	<target name="compile" depends="init">
+		<javac target="1.5" source="1.5" debug="true" srcdir="${base.dir}" destdir="${class.dir}">
+			<classpath>
+				<path>
+					<fileset dir="${lib.dir}"/>
+					<fileset dir="${class.dir}"/>
+				</path>
+			</classpath>
+		</javac>
+	</target>
+	
+	<!-- Jar 'em up -->
+	<target name="jar" depends="compile" description="Build mcommons4j jar">
+		<jar jarfile="${build.root}/${jar.name}">
+			<fileset dir="${class.dir}"/>
+		</jar>
+	</target>
+	
+</project>
