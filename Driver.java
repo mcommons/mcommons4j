@@ -1,8 +1,23 @@
+import java.io.InputStream;
+import java.io.StringWriter;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+
 public class Driver {
   public static void main(String[] args) throws Exception
   {
-    mCommons site = new mCommons("http://hrc.localhost.com:3000/api/");    
-    User me = new User("asdf@asdf.com", "asdf");
+	  User me = new User("asdf@asdf.com", "asdf");
+	  mCommons site = new mCommons("http://hrc.localhost.com:3000/api/", me);    
+    
     
 //    Campaign[] campaigns = {};
 //    
@@ -13,23 +28,27 @@ public class Driver {
 //      System.out.println(campaigns[i].toString());
 //    }
 //    
-    Group[] groups;
-    groups = site.getGroups(me);
-    
-    for (int i=0; i < groups.length; i++){
-      System.out.println(groups[i].toString());
-    }
-    
-    Profile[] profiles;
-    profiles = site.getGroupMembers(me, groups[groups.length-1]);
-    for(int i=0; i < profiles.length; i++){
-      System.out.println(profiles[i].toString());
-    }
+//    Group[] groups;
+//    groups = site.getGroups();
+//    
+//    for (int i=0; i < groups.length; i++){
+//      System.out.println(groups[i].toString());
+//    }
+//    
+//    Profile[] profiles;
+//    profiles = site.getGroupMembers(groups[groups.length-1]);
+//    for(int i=0; i < profiles.length; i++){
+//      System.out.println(profiles[i].toString());
+//    }
     
 //    CampaignSubscriber[] subz;
 //    subz = site.getCampaignSubscribers(me, campaigns[2]);
 //    for(int i=0; i<100; i++){
 //      System.out.println(subz[i].toString());
 //    }
+
+       site.sendSmsMessage("471", "9732228304", "hi");
+	  
+	  
   }
 }
