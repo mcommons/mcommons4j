@@ -17,6 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
  
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -33,13 +34,11 @@ public class mCommons {
     user = aUser;
   }
   
-  public CampaignSubscriber[] getCampaignSubscribers(Campaign campaign)
-    throws Exception{
+  public CampaignSubscriber[] getCampaignSubscribers(Campaign campaign) throws Exception{
     return getCampaignSubscribers(campaign.getId());
     }
   
-  public CampaignSubscriber[] getCampaignSubscribers(String campaignId)
-    throws Exception {
+  public CampaignSubscriber[] getCampaignSubscribers(String campaignId) throws Exception {
         NodeList subList =
           getNodeListFromPage(rootUrl+"campaign_subscribers?campaign_id="+campaignId, "sub");
         CampaignSubscriber[] allSubs= new CampaignSubscriber[subList.getLength()];
@@ -218,10 +217,18 @@ public class mCommons {
 	    NodeList responseList = doc.getElementsByTagName("response");	    
         Element responseElem = (Element) responseList.item(0);
         
-//        assert responseElem.getAttribute("success").equals(true);        
+        if (responseElem.getAttribute("success").equals("true")){
+        	return "success";
+        }
+        else{
+        	NodeList errorList = doc.getElementsByTagName("error");	    
+            Element errorElem = (Element) errorList.item(0);
+            return "error" + errorElem.getAttribute("id") + ":" + errorElem.getAttribute("message");
+        }
+        	
 
         
-        return responseElem.getAttribute("success");
+        
         }
     
   private void authenticate(URLConnection connection){
