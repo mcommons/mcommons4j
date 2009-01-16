@@ -16,6 +16,12 @@
 	<property name="build.name" value="mcommons4j-${build.time}"/>
   <property name="class.dir" value="${build.root}/mcommons4j-bin"/>
 	<property name="jar.name" value="${build.name}.jar"/>
+	
+	<path id="files-classpath">  
+    <fileset dir="${lib.dir}">  
+      <include name="*.jar"/>  
+    </fileset>  
+  </path>
   
 		<!-- Basic initialization -->
 	<target name="init" depends="clean">
@@ -33,6 +39,7 @@
 	<target name="compile" depends="init">
 		<javac target="1.5" source="1.5" debug="true" srcdir="${base.dir}" destdir="${class.dir}">
 			<classpath>
+        <path refid="files-classpath" />  
 				<path>
 					<fileset dir="${class.dir}"/>
 				</path>
