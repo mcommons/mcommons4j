@@ -1,0 +1,17 @@
+=== mCommons4j
+
+- [Code on GitHub](http://github.com/mcommons/mcommons4j)
+
+=== Description
+
+Java client library for Mobile Commons REST API
+(http://mcommons.com/developers/mobile-commons-rest-api)
+
+=== Authors
+
+Jeff Latz, http://github.com/fareastside
+
+=== License
+
+Copyright (c) 2008 Mobile Commons
+See MIT-LICENSE in this directory.
